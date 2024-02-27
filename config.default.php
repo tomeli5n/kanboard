@@ -10,7 +10,7 @@
 define('DATA_DIR', __DIR__.DIRECTORY_SEPARATOR.'data');
 
 // Enable/Disable debug
-define('DEBUG', false);
+define('DEBUG', true);
 
 // Available log drivers: syslog, stderr, stdout, system or file
 define('LOG_DRIVER', 'system');

@@ -9,7 +9,9 @@
     </ul>
     <?php endif ?>
 </div>
-
+<pre>
+<?php print_r($notifications);?>
+</pre>
 <?php if (empty($notifications)): ?>
     <p class="alert"><?= t('No notification.') ?></p>
 <?php else: ?>
@@ -24,6 +26,8 @@
         </div>
         &nbsp;
     </div>
+<!-- aca notif -->
+
     <?php foreach ($notifications as $notification): ?>
     <div class="table-list-row table-border-left">
         <span class="table-list-title">

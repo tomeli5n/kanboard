@@ -9,12 +9,12 @@ LABEL org.opencontainers.image.url=https://kanboard.org
 LABEL org.opencontainers.image.documentation=https://docs.kanboard.org
 
 VOLUME /var/www/app/data
-VOLUME /var/www/app/plugins
+#VOLUME /var/www/app/plugins
 VOLUME /etc/nginx/ssl
 
 EXPOSE 80 443
 
-ARG VERSION
+ARG VERSION=1.2.32
 
 RUN apk --no-cache --update add \
     tzdata openssl unzip nginx bash ca-certificates s6 curl ssmtp mailx php82 php82-phar php82-curl \
@@ -29,6 +29,9 @@ ADD . /var/www/app
 ADD docker/ /
 
 RUN rm -rf /var/www/app/docker && echo $VERSION > /var/www/app/app/version.txt
+
+# Cambia los permisos del directorio de plugins para hacerlos más permisivos
+RUN chmod -R 777 /var/www/app/plugins
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD []

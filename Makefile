@@ -1,7 +1,7 @@
 DOCKER_IMAGE := docker.io/kanboard/kanboard
 DOCKER_TAG := main
-VERSION := $(shell git rev-parse --short HEAD)
-
+#VERSION := $(shell git rev-parse --short HEAD)
+VERSION := 1.2.32
 .PHONY: archive test-sqlite test-mysql test-postgres sql \
 	docker-image docker-images docker-run docker-sh
 
