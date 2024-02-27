@@ -11,7 +11,7 @@ class Plugin extends Base
     public function initialize()
     {
         $this->template->setTemplateOverride('header', 'NotifyPlus:header');
-        //$this->template->hook->attach('template:web_notification:show', 'Notifyplus:web_notification/show3');
+        $this->template->setTemplateOverride('web_notification/show', 'NotifyPlus:web_notification/show');
     }
 
     public function getCompatibleVersion()

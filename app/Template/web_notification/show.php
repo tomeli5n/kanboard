@@ -10,7 +10,7 @@
     <?php endif ?>
 </div>
 <pre>
-<?php print_r($notifications);?>
+<?php //print_r($notifications);?>
 </pre>
 <?php if (empty($notifications)): ?>
     <p class="alert"><?= t('No notification.') ?></p>
