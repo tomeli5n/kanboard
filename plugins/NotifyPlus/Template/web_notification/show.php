@@ -15,6 +15,29 @@
 <?php if (empty($notifications)): ?>
     <p class="alert"><?= t('No notification.') ?></p>
 <?php else: ?>
+    <?php 
+        // Agrupar notificaciones por task_id
+        $groupedNotifications = [];
+        foreach ($notifications as $notification) {
+            $task_id = $notification['event_data']['task']['id']; // Asumimos que siempre hay un task_id
+            if (!isset($groupedNotifications[$task_id])) {
+                $groupedNotifications[$task_id] = [
+                    'task_id' => $task_id,
+                    'project_name' => $notification['event_data']['task']['project_name'],
+                    'project_id' => $notification['event_data']['task']['project_id'],
+                    'title' => "Notifications for task #" . $task_id,
+                    'date_creation' => $notification['date_creation'], // Usar la fecha más reciente o una lógica específica
+                    'notifications' => []
+                ];
+            }
+            $groupedNotifications[$task_id]['notifications'][] = $notification;
+        } ?>
+        <pre>
+            notificaciones agrupadas 
+            -----------------
+            <?php print_r($groupedNotifications);?>
+        </pre>
+
 <div class="table-list">
     <div class="table-list-header">
         <div class="table-list-header-count">
@@ -68,5 +91,24 @@
         </div>
     </div>
     <?php endforeach ?>
+    ­̣­̣̣̣̣<?php foreach ($groupedNotifications as $group): ?>
+    <div class="table-list-row table-border-left">
+        <span class="table-list-title">
+            <i class="fa fa-tasks fa-fw"></i>
+            <?= $this->url->link(
+                $this->text->e($group['project_name']),
+                'BoardViewController',
+                'show',
+                array('project_id' => $group['project_id'])
+            ) ?> &gt;
+            <?= $this->url->link($group['title'], 'TaskViewController', 'show', array('task_id' => $group['task_id'])) ?>
+        </span>
+        <div class="table-list-details">
+            <?= $this->dt->datetime($group['date_creation']) ?>
+            <!-- Aquí podrías agregar un enlace para marcar todas las notificaciones del grupo como leídas -->
+        </div>
+    </div>
+    <?php endforeach ?>
+
 </div>
 <?php endif ?>
