@@ -96,18 +96,20 @@
         </div>
         <?php foreach ($groupedNotifications as $group): ?>
     <div class="table-list-row table-border-left">
+        <h2>
         <span class="table-list-title">
             <?= $this->url->link($group['title'], 'TaskViewController', 'show', array('task_id' => $group['task_id'])) ?>
-            <i class="fa fa-tasks fa-fw"></i>
         </span>
+        </h2>
     <div class="table-list-details">
+
         <?= $this->url->link(
                 $this->text->e($group['project_name']),
                 'BoardViewController',
                 'show',
                 array('project_id' => $group['project_id'])
             ) ?> &gt;
-
+        <i class="fa fa-tasks fa-fw"></i>
             <?= $this->dt->datetime($group['date_creation']) ?>
             <!-- Aquí podrías agregar un enlace para marcar todas las notificaciones del grupo como leídas -->
         </div>
