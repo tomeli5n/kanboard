@@ -9,9 +9,6 @@
     </ul>
     <?php endif ?>
 </div>
-<pre>
-<?php print_r($notifications);?>
-</pre>
 <?php if (empty($notifications)): ?>
     <p class="alert"><?= t('No notification.') ?></p>
 <?php else: ?>
@@ -25,19 +22,13 @@
                     'task_id' => $task_id,
                     'project_name' => $notification['event_data']['task']['project_name'],
                     'project_id' => $notification['event_data']['task']['project_id'],
-                    'title' => "Notifications for task #" . $task_id,
+                    'title' => $notification['event_data']['task']['title'],
                     'date_creation' => $notification['date_creation'], // Usar la fecha más reciente o una lógica específica
                     'notifications' => []
                 ];
             }
             $groupedNotifications[$task_id]['notifications'][] = $notification;
         } ?>
-        <pre>
-            notificaciones agrupadas 
-            -----------------
-            <?php print_r($groupedNotifications);?>
-        </pre>
-
 <div class="table-list">
     <div class="table-list-header">
         <div class="table-list-header-count">
@@ -91,6 +82,18 @@
         </div>
     </div>
     <?php endforeach ?>
+    <h2>Notificaciones agrupadas</h2>
+    <div class="table-list">
+    <div class="table-list-header">
+        <div class="table-list-header-count">
+            <?php if ($nb_notifications > 1): ?>
+                <?= t('%d notifications', $nb_notifications) ?>
+            <?php else: ?>
+                <?= t('%d notification', $nb_notifications) ?>
+            <?php endif ?>
+        </div>
+        &nbsp;
+    </div>
     ­̣­̣̣̣̣<?php foreach ($groupedNotifications as $group): ?>
     <div class="table-list-row table-border-left">
         <span class="table-list-title">
