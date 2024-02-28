@@ -84,29 +84,30 @@
     <?php endforeach ?>
     <h2>Notificaciones agrupadas</h2>
     <div class="table-list">
-    <div class="table-list-header">
-        <div class="table-list-header-count">
-            <?php if ($nb_notifications > 1): ?>
-                <?= t('%d notifications', $nb_notifications) ?>
-            <?php else: ?>
-                <?= t('%d notification', $nb_notifications) ?>
-            <?php endif ?>
+        <div class="table-list-header">
+            <div class="table-list-header-count">
+                <?php if ($nb_notifications > 1): ?>
+                    <?= t('%d notifications', $nb_notifications) ?>
+                <?php else: ?>
+                    <?= t('%d notification', $nb_notifications) ?>
+                <?php endif ?>
+                </div>
+            &nbsp;
         </div>
-        &nbsp;
-    </div>
-    ­̣­̣̣̣̣<?php foreach ($groupedNotifications as $group): ?>
+        <?php foreach ($groupedNotifications as $group): ?>
     <div class="table-list-row table-border-left">
         <span class="table-list-title">
+            <?= $this->url->link($group['title'], 'TaskViewController', 'show', array('task_id' => $group['task_id'])) ?>
             <i class="fa fa-tasks fa-fw"></i>
-            <?= $this->url->link(
+        </span>
+    <div class="table-list-details">
+        <?= $this->url->link(
                 $this->text->e($group['project_name']),
                 'BoardViewController',
                 'show',
                 array('project_id' => $group['project_id'])
             ) ?> &gt;
-            <?= $this->url->link($group['title'], 'TaskViewController', 'show', array('task_id' => $group['task_id'])) ?>
-        </span>
-        <div class="table-list-details">
+
             <?= $this->dt->datetime($group['date_creation']) ?>
             <!-- Aquí podrías agregar un enlace para marcar todas las notificaciones del grupo como leídas -->
         </div>
