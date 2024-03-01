@@ -111,10 +111,11 @@
             ) ?> &gt;
         <i class="fa fa-tasks fa-fw"></i>
             <?= $this->dt->datetime($group['date_creation']) ?>
-            <!-- Aquí podrías agregar un enlace para marcar todas las notificaciones del grupo como leídas -->
+            <?= $this->modal->replaceIconLink('check', t('Mark as read'), 'WebNotificationController', 'remove', array('user_id' => $user['id'], 'notification_id' => $group['notifications'][0]['id'], 'csrf_token' => $this->app->getToken()->getReusableCSRFToken())) ?>
         </div>
     </div>
     <?php endforeach ?>
-
+            <pre>
+<?php print_r($groupedNotifications);?></pre>
 </div>
 <?php endif ?>
