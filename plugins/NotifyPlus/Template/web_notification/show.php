@@ -17,7 +17,7 @@
         $groupedNotifications = [];
         foreach ($notifications as $notification) {
             $task_id = $notification['event_data']['task']['id']; // Asumimos que siempre hay un task_id
-            if (!isset($groupedNotifications[$task_id])) {
+            //if (!isset($groupedNotifications[$task_id])) {
                 $groupedNotifications[$task_id] = [
                     'task_id' => $task_id,
                     'project_name' => $notification['event_data']['task']['project_name'],
@@ -26,7 +26,7 @@
                     'date_creation' => $notification['date_creation'], // Usar la fecha más reciente o una lógica específica
                     'notifications' => []
                 ];
-            }
+            //}
             $groupedNotifications[$task_id]['notifications'][] = $notification;
         } ?>
 <div class="table-list">
