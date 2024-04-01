@@ -22,4 +22,18 @@ class Plugin extends Base
         // <=1.0.37
         return '>=1.0.35';
     }
+
+    /**
+     * Mark a notification as read
+     *
+     * @access public
+     */
+    public function remove()
+    {
+        $this->checkReusableGETCSRFParam();
+        $user_id = $this->getUserId();
+        $notification_id = $this->request->getIntegerParam('notification_id');
+        //$this->userUnreadNotificationModel->markAsRead($user_id, $notification_id);
+        //$this->show();
+    }
 }
