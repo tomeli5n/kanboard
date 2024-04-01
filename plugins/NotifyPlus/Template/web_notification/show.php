@@ -79,6 +79,7 @@
         <div class="table-list-details">
             <?= $this->dt->datetime($notification['date_creation']) ?>
             <?= $this->modal->replaceIconLink('check', t('Mark as read'), 'WebNotificationController', 'remove', array('user_id' => $user['id'], 'notification_id' => $notification['id'], 'csrf_token' => $this->app->getToken()->getReusableCSRFToken())) ?>
+            <?= $this->modal->replaceIconLink('check', t('Marcar como leida plugin'), 'WebNotificationController', 'remove', array('user_id' => $user['id'], 'notification_id' => $notification['id'], 'csrf_token' => $this->app->getToken()->getReusableCSRFToken())) ?>
         </div>
     </div>
     <?php endforeach ?>
